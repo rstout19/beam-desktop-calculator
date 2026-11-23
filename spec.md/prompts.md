@@ -12,6 +12,12 @@
 ## Request
 ## Request
 ## Request
+## Request
+- **What I asked:** Use `https://github.com/rstout19/beam-desktop-calculator` as the public GitHub remote.
+- **What I changed:** Added it as `origin` and pushed the `main` branch; recorded this request.
+- **Whether it worked:** Yes; GitHub accepted the branch and `main` now tracks `origin/main`.
+
+## Request
 - **What I asked:** Plan the setup of a public GitHub repository remote and do the preparation possible without user action.
 - **What I changed:** Added a README with setup/run instructions and a `.gitignore` for macOS metadata, Python caches, and local virtual environments.
 - **Whether it worked:** Repository is prepared locally. I could not create the remote because GitHub authentication through the connected tool is unavailable and the `gh` CLI is not installed.
