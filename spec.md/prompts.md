@@ -6,6 +6,30 @@
 ## Request
 ## Request
 ## Request
+## Request
+## Request
+## Request
+## Request
+- **What I asked:** Run all validation cases from the spec, compare expected and actual values, and commit once they match.
+- **What I changed:** Evaluated the spec's Case 1 using `analyze_beam` and confirmed the app defaults are the same inputs. Recorded the validation results.
+- **Whether it worked:** Yes. Reactions are 22.5 kip and 7.5 kip; maximum moment is 126.6 kip-ft at 11.25 ft, matching the spec.
+
+## Request
+- **What I asked:** Make loads different colors when the beam has more than one load.
+- **What I changed:** Added add/remove load rows, distinct repeating colors for the load markers and arrows in the beam schematic, and combined reactions/shear/moment calculations using superposition. Updated the specification for multiple overlapping partial uniform loads.
+- **Whether it worked:** The single-load screenshot case still gives 22.5 kip and 7.5 kip reactions and 126.6 kip-ft at 11.25 ft. A two-load calculation and Python compilation passed; the updated Tkinter app launched.
+
+## Request
+- **What I asked:** Open my terminal.
+- **What I changed:** Opened the macOS Terminal app.
+- **Whether it worked:** The launch command completed successfully.
+
+## Request
+- **What I asked:** Build the app according to the implementation plan and beam specification, then run it and try the inputs.
+- **What I changed:** Added `app.py` with a Tkinter interface and embedded beam/loading, shear, and moment diagrams; added `beam_calculations.py` with separate statics and diagram calculations. Used the screenshot's validation case as the initial values and clear stale results when input is invalid.
+- **Whether it worked:** Python compilation passed; the validation calculation returned 22.5 kip, 7.5 kip, and 126.6 kip-ft at 11.25 ft. A partial-load calculation was accepted. Launched `python3 app.py`; the GUI process is running for interactive review.
+
+## Request
 - **What I asked:** Commit the project files after initializing the Git repository.
 - **What I changed:** Committed `AGENTS.md`, `index.html`, and the `spec.md/` project files; left `.DS_Store` untracked.
 - **Whether it worked:** Yes; commit `b3b9cae` was created.

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-A Python desktop application for analyzing a simply supported beam under a uniform distributed load. It reports support reactions and the maximum bending moment, and plots the beam's shear and moment diagrams. The first version supports one uniform load over a user-selected portion of the beam.
+A Python desktop application for analyzing a simply supported beam under one or more uniform distributed loads. It reports support reactions and the maximum bending moment, and plots the beam's shear and moment diagrams.
 
 ## Platform
 
@@ -15,7 +15,7 @@ A Python desktop application for analyzing a simply supported beam under a unifo
 - The beam is straight, prismatic, and simply supported at (x=0) and (x=L).
 - The beam span (L) is measured in feet.
 - The beam section is identified by a text label such as `W18x35`. The label is informational; section strength, deflection, and self-weight calculations are outside this calculator's scope.
-- One downward uniform distributed load of intensity (w) acts from position (a) to position (b), where (0 \le a < b \le L).
+- Each downward uniform distributed load (i), with intensity (w_i), acts from position (a_i) to position (b_i), where (0 \le a_i < b_i \le L). Loads may overlap.
 - Use kip for force, kip/ft for distributed load, and kip-ft for moment.
 - Use static equilibrium with the usual sign convention: positive support reactions act upward, positive shear is upward on the left face, and positive sagging moment is plotted above the axis.
 
@@ -25,33 +25,33 @@ A Python desktop application for analyzing a simply supported beam under a unifo
 |---|---|---|
 | Beam span, (L) | ft | Distance between supports |
 | Beam section | — | Descriptive label, for example `W18x35` |
-| Uniform load, (w) | kip/ft | Downward load intensity |
-| Load start, (a) | ft | Position where the distributed load begins, measured from the left support |
-| Load end, (b) | ft | Position where the distributed load ends, measured from the left support |
+| Uniform load, (w_i) | kip/ft | Downward load intensity for each load row |
+| Load start, (a_i) | ft | Start position of that load, measured from the left support |
+| Load end, (b_i) | ft | End position of that load, measured from the left support |
 
-Provide editable numeric controls with units shown beside their labels. The section label is free text. Numeric inputs must be finite; require (L>0), (w\ge0), and (0\le a<b\le L). Reject invalid or empty input, explain the constraint, and do not display results calculated from invalid values.
+Provide editable numeric controls with units shown beside their labels and allow users to add or remove load rows, keeping at least one row. Give each load a distinct color and use that color consistently in its beam schematic representation. The section label is free text. Numeric inputs must be finite; require (L>0), (w_i\ge0), and (0\le a_i<b_i\le L) for every load. Reject invalid or empty input, explain the constraint, and do not display results calculated from invalid values.
 
 ## Calculations
 
-Let (Q=w(b-a)) be the resultant of the distributed load, acting at its centroid (x_c=(a+b)/2).
+For each load (i), let (Q_i=w_i(b_i-a_i)) be its resultant, acting at centroid (x_{c,i}=(a_i+b_i)/2). Use superposition to combine the loads.
 
 Calculate the reactions from equilibrium:
 
 \[
-R_B=\frac{Qx_c}{L}, \qquad R_A=Q-R_B
+ R_B=\frac{\sum_i Q_i x_{c,i}}{L}, \qquad R_A=\sum_i Q_i-R_B
 \]
 
 For positions (0\le x\le L), calculate shear and bending moment using the load intensity active between (a) and (b):
 
 \[
-V(x)=R_A-w\max\left(0,\min(x,b)-a\right)
+V(x)=R_A-\sum_i w_i\max\left(0,\min(x,b_i)-a_i\right)
 \]
 
 \[
-M(x)=R_Ax-\frac{w}{2}\max(0,x-a)^2+\frac{w}{2}\max(0,x-b)^2
+M(x)=R_Ax+\sum_i\left[-\frac{w_i}{2}\max(0,x-a_i)^2+\frac{w_i}{2}\max(0,x-b_i)^2\right]
 \]
 
-The formulas must also work when the load starts after the left support or ends before the right support. Find the maximum positive bending moment over the span and report its location. For a nonzero uniform load, include the zero-shear location inside the loaded interval when finding the maximum; also inspect interval boundaries and support locations. For zero load, report zero maximum moment at the supports.
+The formulas must also work when loads start after the left support, end before the right support, or overlap. Find the maximum positive bending moment over the span and report its location. Check load boundaries and support locations, plus any zero-shear location within each interval between load boundaries. For zero total load, report zero maximum moment at the supports.
 
 Do not round values used in calculations. Round only for display: reactions and load intensity to a sensible number of decimals, and maximum moment and its location to one decimal place by default.
 
@@ -59,7 +59,7 @@ Do not round values used in calculations. Round only for display: reactions and 
 
 - Left and right support reactions, (R_A) and (R_B), in kips.
 - Maximum positive bending moment in kip-ft and its position in feet from the left support.
-- A beam schematic showing the supports, span, section label, and distributed load extent and direction.
+- A beam schematic showing the supports, span, section label, and each distributed load's extent and direction in its distinct color.
 - A shear-force diagram (V(x)) and bending-moment diagram (M(x)), with labeled axes and units. Mark the maximum moment and its location on the moment diagram.
 - Update all results and diagrams whenever a valid input changes.
 
@@ -92,7 +92,7 @@ Expected displayed maximum: **126.6 kip-ft at 11.25 ft**.
 ## Out of scope
 
 - Cantilever, fixed, continuous, or otherwise statically indeterminate beams
-- Multiple point loads or multiple distributed loads
+- Multiple point loads
 - Load combinations, moving loads, or dynamic analysis
 - Section capacity, stress, buckling, or design checks
 - Deflection calculations
