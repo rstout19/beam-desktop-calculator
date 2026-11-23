@@ -13,6 +13,12 @@
 ## Request
 ## Request
 ## Request
+## Request
+- **What I asked:** Follow the README and GitHub steps shown in the course screenshot.
+- **What I changed:** Shortened `README.md` to state what the app does, which packages to install, and the start command. The public repository is already set up, so this update is ready to commit and push.
+- **Whether it worked:** README now contains all requested setup information. Exchanging repository URLs and cloning a classmate's project require the user to coordinate with their neighbor.
+
+## Request
 - **What I asked:** Use `https://github.com/rstout19/beam-desktop-calculator` as the public GitHub remote.
 - **What I changed:** Added it as `origin` and pushed the `main` branch; recorded this request.
 - **Whether it worked:** Yes; GitHub accepted the branch and `main` now tracks `origin/main`.
