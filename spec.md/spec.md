@@ -15,6 +15,7 @@ A Python desktop application for analyzing a simply supported beam under one or 
 - The beam is straight, prismatic, and simply supported at (x=0) and (x=L).
 - The beam span (L) is measured in feet.
 - The beam section is identified by a text label such as `W18x35`. The label is informational; section strength, deflection, and self-weight calculations are outside this calculator's scope.
+- A deflection limit in inches may be recorded as a design note. This version does not calculate deflection or check the limit.
 - Each downward uniform distributed load (i), with intensity (w_i), acts from position (a_i) to position (b_i), where (0 \le a_i < b_i \le L). Loads may overlap.
 - Use kip for force, kip/ft for distributed load, and kip-ft for moment.
 - Use static equilibrium with the usual sign convention: positive support reactions act upward, positive shear is upward on the left face, and positive sagging moment is plotted above the axis.
@@ -25,11 +26,16 @@ A Python desktop application for analyzing a simply supported beam under one or 
 |---|---|---|
 | Beam span, (L) | ft | Distance between supports |
 | Beam section | — | Descriptive label, for example `W18x35` |
+| Deflection limit | in | Optional design note saved with the beam; not checked by calculations |
 | Uniform load, (w_i) | kip/ft | Downward load intensity for each load row |
 | Load start, (a_i) | ft | Start position of that load, measured from the left support |
 | Load end, (b_i) | ft | End position of that load, measured from the left support |
 
-Provide editable numeric controls with units shown beside their labels and allow users to add or remove load rows, keeping at least one row. Give each load a distinct color and use that color consistently in its beam schematic representation. The section label is free text. Numeric inputs must be finite; require (L>0), (w_i\ge0), and (0\le a_i<b_i\le L) for every load. Reject invalid or empty input, explain the constraint, and do not display results calculated from invalid values.
+Provide editable numeric controls with units shown beside their labels and allow users to add or remove load rows, keeping at least one row. Give each load a distinct color and use that color consistently in its beam schematic representation. The section label is free text. Numeric inputs must be finite; require (L>0), (w_i\ge0), and (0\le a_i<b_i\le L) for every load. A supplied deflection limit must be a finite positive number. Reject invalid or empty required input, explain the constraint, and do not display results calculated from invalid values.
+
+## Save and open
+
+Provide a File menu with Save and Open commands. Save the support type (`simply_supported`), span, section label, optional deflection limit, and every load's intensity, start, and end to a JSON file. Open must restore all saved values and load rows. Handle unreadable or malformed files with a clear error message and leave the current beam unchanged. The support type is stored explicitly even though only simply supported beams are currently supported.
 
 ## Calculations
 
@@ -97,4 +103,4 @@ Expected displayed maximum: **126.6 kip-ft at 11.25 ft**.
 - Section capacity, stress, buckling, or design checks
 - Deflection calculations
 - Automatic section property lookup or structural code compliance
-- Saving, exporting, or sharing analyses
+- Exporting or sharing analyses

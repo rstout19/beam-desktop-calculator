@@ -10,6 +10,12 @@
 ## Request
 ## Request
 ## Request
+## Request
+- **What I asked:** Follow Step 6 by adding the Save/Open desktop feature first, including support type, span, section, deflection limit, and loads; update the spec, try it, rerun validations, and commit.
+- **What I changed:** Added a File menu with JSON Save/Open, stored/restored all requested beam fields and load rows, added an optional deflection-limit note, and documented the feature in the spec while removing saving from out of scope.
+- **Whether it worked:** Save/Open round-trip passed with a temporary file; Python compilation passed; Case 1 still matches (22.5 kip, 7.5 kip, 126.6 kip-ft at 11.25 ft).
+
+## Request
 - **What I asked:** Run all validation cases from the spec, compare expected and actual values, and commit once they match.
 - **What I changed:** Evaluated the spec's Case 1 using `analyze_beam` and confirmed the app defaults are the same inputs. Recorded the validation results.
 - **Whether it worked:** Yes. Reactions are 22.5 kip and 7.5 kip; maximum moment is 126.6 kip-ft at 11.25 ft, matching the spec.
