@@ -11,6 +11,12 @@
 ## Request
 ## Request
 ## Request
+## Request
+- **What I asked:** Plan the setup of a public GitHub repository remote and do the preparation possible without user action.
+- **What I changed:** Added a README with setup/run instructions and a `.gitignore` for macOS metadata, Python caches, and local virtual environments.
+- **Whether it worked:** Repository is prepared locally. I could not create the remote because GitHub authentication through the connected tool is unavailable and the `gh` CLI is not installed.
+
+## Request
 - **What I asked:** Follow Step 6 by adding the Save/Open desktop feature first, including support type, span, section, deflection limit, and loads; update the spec, try it, rerun validations, and commit.
 - **What I changed:** Added a File menu with JSON Save/Open, stored/restored all requested beam fields and load rows, added an optional deflection-limit note, and documented the feature in the spec while removing saving from out of scope.
 - **Whether it worked:** Save/Open round-trip passed with a temporary file; Python compilation passed; Case 1 still matches (22.5 kip, 7.5 kip, 126.6 kip-ft at 11.25 ft).
